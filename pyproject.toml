@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "template-python"
+version = "0.1.0"
+description = "A template project for Python"
+authors = ["yoseio <yoseio@brainoid.dev>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+jupyter = "^1.0.0"
+poethepoet = "^0.27.0"
+pyright = "^1.1.370"
+ruff = "^0.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poe.tasks]
+_pyright = "pyright"
+_ruff_check = 'ruff check . --preview'
+_ruff_format = "ruff format  . --preview"
+_ruff_sort = "ruff check --select I --fix . --preview"
+
+[[tool.poe.tasks.format]]
+sequence = ['_ruff_sort', '_ruff_format']
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.check]]
+sequence = ['_ruff_check', '_pyright']
+ignore_fail = 'return_non_zero'
