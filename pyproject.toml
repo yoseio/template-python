@@ -13,7 +13,7 @@ python = "^3.11"
 ipykernel = "^6.29.5"
 jupyter = "^1.0.0"
 poethepoet = "^0.27.0"
-pyright = "^1.1.376"
+pyright = "^1.1.377"
 ruff = "^0.6.1"
 
 [build-system]
