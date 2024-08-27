@@ -1,23 +1,17 @@
 {
-  "name": "template-python",
+  "name": "${containerWorkspaceFolderBasename}",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "features": {
-    "ghcr.io/devcontainers-contrib/features/poetry:2": {},
-    "ghcr.io/devcontainers/features/nvidia-cuda:1": {}
+    "./rye": {}
   },
   "customizations": {
     "vscode": {
-      "extensions": [
-        "ms-python.python",
-        "ms-toolsai.jupyter",
-        "tamasfe.even-better-toml"
-      ]
+      "settings": {
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.typeCheckingMode": "basic"
+      }
     }
-  },
-  "containerEnv": {
-    "POETRY_VIRTUALENVS_IN_PROJECT": "true"
-  },
-  "postCreateCommand": "poetry install"
+  }
 }

@@ -1,0 +1,29 @@
+{
+  "id": "rye",
+  "version": "0.1.0",
+  "name": "Rye",
+  "description": "Rye: a Hassle-Free Python Experience",
+  "options": {
+    "enableCompletion": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable completion"
+    },
+    "enableUv": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable uv"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python"
+      },
+      "extensions": [
+        "ms-python.python",
+        "tamasfe.even-better-toml"
+      ]
+    }
+  }
+}

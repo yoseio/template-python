@@ -1,35 +1,37 @@
-[tool.poetry]
+[project]
 name = "template-python"
 version = "0.1.0"
 description = "A template project for Python"
-authors = ["yoseio <yoseio@brainoid.dev>"]
+authors = [{ name = "yoseio", email = "yoseio@brainoid.dev" }]
 license = "MIT"
 readme = "README.md"
+requires-python = ">= 3.12"
+dependencies = []
 
-[tool.poetry.dependencies]
-python = "^3.11"
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "ipykernel>=6.29.5",
+    "jupyter>=1.0.0",
+    "pyright>=1.1.377",
+    "ruff>=0.6.2",
+]
 
-[tool.poetry.group.dev.dependencies]
-ipykernel = "^6.29.5"
-jupyter = "^1.0.0"
-poethepoet = "^0.27.0"
-pyright = "^1.1.377"
-ruff = "^0.6.2"
+[tool.rye.scripts]
+check = { chain = ["ruff-check", "pyright"] }
+format = { chain = ["ruff-sort", "ruff-format"] }
+
+pyright = "pyright"
+ruff-check = "ruff check . --preview"
+ruff-format = "ruff format  . --preview"
+ruff-sort = "ruff check --select I --fix . --preview"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.poe.tasks]
-_pyright = "pyright"
-_ruff_check = 'ruff check . --preview'
-_ruff_format = "ruff format  . --preview"
-_ruff_sort = "ruff check --select I --fix . --preview"
+[tool.hatch.metadata]
+allow-direct-references = true
 
-[[tool.poe.tasks.format]]
-sequence = ['_ruff_sort', '_ruff_format']
-ignore_fail = 'return_non_zero'
-
-[[tool.poe.tasks.check]]
-sequence = ['_ruff_check', '_pyright']
-ignore_fail = 'return_non_zero'
+[tool.hatch.build.targets.wheel]
+packages = ["src/template_python"]
